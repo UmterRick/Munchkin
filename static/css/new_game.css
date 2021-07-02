@@ -1,0 +1,10 @@
+:root {
+    --base-scale: calc(100vw / 120);
+    --h2-font-size: max(1em, min(4em, calc(var(--base-scale) * 4)));
+  }
+  
+  body {
+    display: grid;
+    background-color: #fdd090;
+    
+  }
