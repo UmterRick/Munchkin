@@ -9,10 +9,10 @@ from uuid import uuid4
 def home(request):
     return render(request, 'home.html')
 
-
-def new_room(request, pk):
-    games = get_object_or_404(Game, pk=pk)
-    return render(request, 'new_game.html', {'games': games})
+def new_room(request):
+    game = Game.objects.create(myid=uuid4, status=0)
+    
+    return render(request, 'new_game.html')
 
 
 def join_room(request):
