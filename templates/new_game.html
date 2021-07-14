@@ -1,14 +1,44 @@
-{% load static %}<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MyProject</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
-  </head>
+{% extends 'base.html' %} {%block main-container%}
+<form>
+  <div class="input_wrapper">
+    <input
+      id="IDinput"
+      class="id_input"
+      name="s"
+      value="{{room_id}}"
+      type="text"
+      readonly
+    />
 
-  <body>
-  </body>
-</html>
+    <button onclick="copyFunc()" class="tooltip">
+      <span class="tooltiptext" id="myTooltip">Copy ID</span>
+    </button>
+  </div>
+</form>
+
+<table>
+  <tr>
+    <th>Player name</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>.</td>
+    <td>.</td>
+  </tr>
+  {% for player in players %}
+  <tr>
+    <td>{{ player.name}}</td>
+    <td>{{player.status}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<script>
+  function copyFunc() {
+    var copyText = document.getElementById("IDinput");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+  }
+</script>
+{% endblock%}

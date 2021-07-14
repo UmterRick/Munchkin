@@ -20,7 +20,11 @@ from game import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('new_room/', views.new_room, name='new_room'),
-    path('join_room/', views.join_room, name='join_room'),
-
+    path('new_room', views.new_room, name='new_room'),
+    path('join_room', views.join_room, name='join_room'),
+    path('clear_cookie', views.clear_cookie, name='clear_cooie'),
+    path('new_player', views.new_player, name='new_player'),
+    #
+    path('ajax', views.ajax, name='a'),
+    path('check-name/', views.check_name, name='check-name'),
 ]

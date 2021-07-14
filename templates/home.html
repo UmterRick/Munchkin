@@ -1,49 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MyProject</title>
-    {% load static %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/home.css' %}" />
-  </head>
+{% extends 'base.html' %} {% block main-container%}
+<p>{% lorem 1 b %}</p>
+<div class="connect">
+  <figure class="new-room">
+    <button id="create" onclick="document.location='clear_cookie'"></button>
+    <figcaption>Create Room</figcaption>
+  </figure>
 
-  <body>
-    <header>
-      <div class="container" id="header-container">
-        <h2 align="center">Munchkin Counter</h2>
-        <nav></nav>
-      </div>
-    </header>
-
-    <div class="main">
-      <div class="container" id="main-container">
-        <p>{% lorem 1 b random %}</p>
-        <div class="connect">
-          <figure class="new-room">
-            <form action="/new_room">
-              {% csrf_token %}
-              <button id="create"></button>
-            </form>
-            <figcaption>Create Room</figcaption>
-          </figure>
-
-          <figure class="join-room">
-            <form action="/join_room">
-              {% csrf_token %}
-              <button id="join"></button>
-            </form>
-            <figcaption>Join Room</figcaption>
-          </figure>
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      <div class="container" id="footer-container">
-        <h3>Footer</h3>
-      </div>
-    </footer>
-  </body>
-</html>
+  <figure class="join-room">
+    <button id="join" onclick="document.location='join_room'"></button>
+    <figcaption>Join Room</figcaption>
+  </figure>
+</div>
+{% endblock%}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %} {%block main-container%}
+<form action="new_player" method="POST" , id="new_player">
+  {% csrf_token %}
+  <div class="input_wrapper">
+    <input
+      id="output"
+      class="id_input"
+      placeholder="Paste Room ID here"
+      type="text"
+      name="id_input"
+    />
+    <button type="button" class="paste_btn" onclick="pasteFunc()">
+      Paste from ClipBoard
+    </button>
+  </div>
+  <div class="radio">
+    <input
+      label="Viewer"
+      type="radio"
+      id="viewer_radio"
+      name="radioName"
+      checked
+    />
+    <input label="Player" type="radio" id="player_radio" name="radioName" />
+  </div>
+
+  <input
+    class="player_name"
+    maxlength="17"
+    placeholder="Input here name of your Munchkin"
+    type="text"
+    name="name_input"
+  />
+  <button type="submit" class="apply_name">Submit</button>
+</form>
+
+<script>
+  function pasteFunc() {
+    navigator.clipboard
+      .readText()
+      .then((text) => {
+        console.log(text);
+        document.getElementById("output").value = text;
+      })
+      .catch((err) => {
+        console.log("Something went wrong", err);
+      });
+  }
+</script>
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"
+></script>
+
+<script>
+  $("#new_player input").on("change", function () {
+    let mode = $("input[name=radioName]:checked", "#new_player").attr("id");
+    if (mode == "viewer_radio") {
+      $(".player_name").css("display", "none");
+    } else {
+      $(".player_name").css("display", "block");
+    }
+  });
+</script>
+
+<script>
+  $(".apply_name").on("click", function () {
+    let name = $(".player_name").val();
+    let game_id = $("#output").val();
+    let data = {
+      name: name,
+      game_id: game_id,
+    };
+    $.ajax({
+      method: "GET",
+      dataType: "json",
+      url: '{% url "check-name" %}',
+      data: data,
+      success: function (data) {
+        console.log(data);
+      },
+    });
+  });
+</script>
+{%endblock%}
